@@ -42,10 +42,8 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	// "common" module is shared with NeoForge; its transitive deps (forgeconfigapiport-neoforgeapi) are not needed on Fabric
-	implementation("com.mrbysco.armorposer:ArmorPoser-common-${project.minecraft_version}:${project.armor_poser_version}") {
-		transitive = false
-	}
+	// Armor Poser (Fabric jar from Modrinth; contains the shared common code too). If this version does not resolve, use the version id from its Modrinth page.
+	implementation "maven.modrinth:armor-poser:${project.armor_poser_version}"
 
 	compileOnly "maven.modrinth:freecam:${project.freecam_version}"
 }
