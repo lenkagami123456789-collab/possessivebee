@@ -16,11 +16,6 @@ repositories {
 		url "https://maven.saps.dev/releases"
 	}
 	maven {
-		// Forge Config API Port (transitive dependency of Armor Poser)
-		name = "Fuzs"
-		url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
-	}
-	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
 	}
@@ -47,7 +42,10 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	implementation "com.mrbysco.armorposer:ArmorPoser-common-${project.minecraft_version}:${project.armor_poser_version}"
+	// "common" module is shared with NeoForge; its transitive deps (forgeconfigapiport-neoforgeapi) are not needed on Fabric
+	implementation("com.mrbysco.armorposer:ArmorPoser-common-${project.minecraft_version}:${project.armor_poser_version}") {
+		transitive = false
+	}
 
 	compileOnly "maven.modrinth:freecam:${project.freecam_version}"
 }
