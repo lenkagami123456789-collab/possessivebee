@@ -23,7 +23,7 @@ public class ItemInHandRendererMixin {
     private float possessive$tickDelta;
 
     @Inject(
-            method = "renderHandsWithItems",
+            method = "submitHandsWithItems",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/util/Mth;lerp(FFF)F",
@@ -49,10 +49,11 @@ public class ItemInHandRendererMixin {
     }
 
     @ModifyArgs(
-            method = "renderHandsWithItems",
+            method = "submitHandsWithItems",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderArmWithItem(Lnet/minecraft/client/player/AbstractClientPlayer;FFLnet/minecraft/world/InteractionHand;FLnet/minecraft/world/item/ItemStack;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;I)V"
+                    // signature omitted on purpose: the 26.2 descriptor is not verified, Mixin matches by name
+					target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;submitArmWithItem"
             )
     )
     private void possessive$replaceItemToRender(Args args){
