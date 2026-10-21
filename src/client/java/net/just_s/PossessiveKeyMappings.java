@@ -3,7 +3,7 @@ package net.just_s;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mrbysco.armorposer.Reference;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.just_s.camera.ArmorStandCamera;
 import net.just_s.camera.AstralProjectionCamera;
@@ -35,7 +35,7 @@ public class PossessiveKeyMappings {
     );
 
     public static void registerModKeyMappings() {
-        possessKeyMapping = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        possessKeyMapping = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.possessive.possess", // The translation key of the keybinding's name
                 InputConstants.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
                 GLFW.GLFW_KEY_R, // The keycode of the key
@@ -43,7 +43,7 @@ public class PossessiveKeyMappings {
         ));
         ClientTickEvents.END_CLIENT_TICK.register(PossessiveKeyMappings::possessKeyPress);
 
-        savePoseKeyMapping = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        savePoseKeyMapping = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.possessive.save_pose",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_LEFT_BRACKET,
@@ -51,7 +51,7 @@ public class PossessiveKeyMappings {
         ));
         ClientTickEvents.END_CLIENT_TICK.register(PossessiveKeyMappings::savePoseKeyPress);
 
-        loadPoseKeyMapping = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        loadPoseKeyMapping = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.possessive.load_pose",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_BRACKET,
@@ -162,7 +162,7 @@ public class PossessiveKeyMappings {
             );
         }
         camera.playSound(soundEvent, volume, pitch);
-        Minecraft.getInstance().gui.setOverlayMessage(Component.translatable(translatable), false);
+        Minecraft.getInstance().gui.hud.setOverlayMessage(Component.translatable(translatable), false);
     }
 
     private static void savePoseKeyPress(Minecraft client) {
@@ -187,7 +187,7 @@ public class PossessiveKeyMappings {
             }
             if (compoundTag.contains("Pose")) {
                 camera.savePose(compoundTag.getCompoundOrEmpty("Pose"));
-                Minecraft.getInstance().gui.setOverlayMessage(Component.translatable("possessive.message.save_pose"), false);
+                Minecraft.getInstance().gui.hud.setOverlayMessage(Component.translatable("possessive.message.save_pose"), false);
                 camera.playSound(SoundEvents.ARMOR_STAND_PLACE, 0.5f, 1.2f);
             }
         }
@@ -208,7 +208,7 @@ public class PossessiveKeyMappings {
 
         while (loadPoseKeyMapping.consumeClick()) {
             camera.applySavedPose();
-            Minecraft.getInstance().gui.setOverlayMessage(Component.translatable("possessive.message.load_pose"), false);
+            Minecraft.getInstance().gui.hud.setOverlayMessage(Component.translatable("possessive.message.load_pose"), false);
             camera.playSound(SoundEvents.ARMOR_STAND_HIT, 0.5f, 1.2f);
         }
     }

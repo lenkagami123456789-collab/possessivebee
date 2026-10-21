@@ -9,7 +9,7 @@ import net.just_s.PossessiveModClient;
 import net.just_s.mixin.client.LocalPlayerAccessor;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.model.object.armorstand.ArmorStandArmorModel;
@@ -148,7 +148,7 @@ public class ArmorStandCamera extends AbstractCamera {
                 );
             }
             camera.playSound(SoundEvents.APPLY_EFFECT_RAID_OMEN, 1f, 1f);
-            Minecraft.getInstance().gui.setOverlayMessage(Component.translatable("possessive.message.vessel_broken"), false);
+            Minecraft.getInstance().gui.hud.setOverlayMessage(Component.translatable("possessive.message.vessel_broken"), false);
             return;
         }
 
@@ -410,12 +410,12 @@ public class ArmorStandCamera extends AbstractCamera {
     }
 
     @Override
-    public boolean onRenderHotbarAndDecorations(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    public boolean onRenderHotbarAndDecorations(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         renderArmorStandItemHotbar(guiGraphics, deltaTracker);
         return true;
     }
 
-    private void renderArmorStandItemHotbar(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    private void renderArmorStandItemHotbar(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         if (minecraft.player == null) {
             return;
         }
@@ -436,7 +436,7 @@ public class ArmorStandCamera extends AbstractCamera {
         }
     }
 
-    private void renderSlot(GuiGraphics guiGraphics, int i, int j, DeltaTracker deltaTracker, ItemStack itemStack, int k) {
+    private void renderSlot(GuiGraphicsExtractor guiGraphics, int i, int j, DeltaTracker deltaTracker, ItemStack itemStack, int k) {
         if (!itemStack.isEmpty()) {
             float f = (float)itemStack.getPopTime() - deltaTracker.getGameTimeDeltaPartialTick(false);
             if (f > 0.0F) {

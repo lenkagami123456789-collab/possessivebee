@@ -25,7 +25,7 @@ public class CameraHandler {
         Minecraft client = Minecraft.getInstance();
         ((GameRendererAccess)client.gameRenderer).possessive$setRenderHand(newCamera.shouldRenderHand());
 
-        if (client.gameRenderer.getMainCamera().isDetached()) {
+        if (client.gameRenderer.mainCamera().isDetached()) {
             client.options.setCameraType(CameraType.FIRST_PERSON);
         }
 

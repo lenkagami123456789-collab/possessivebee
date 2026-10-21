@@ -2,11 +2,14 @@ package net.just_s.camera;
 
 import com.mrbysco.armorposer.client.gui.ArmorStandScreen;
 import com.mrbysco.armorposer.client.gui.widgets.ToggleButton;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.ARGB;
+
+import java.util.List;
 
 public class AnimatableArmorStandScreen extends ArmorStandScreen {
     private final ArmorStandCamera camera;
@@ -14,7 +17,7 @@ public class AnimatableArmorStandScreen extends ArmorStandScreen {
     private Button syncButton;
 
     public AnimatableArmorStandScreen(ArmorStandCamera armorStandCamera) {
-        super(armorStandCamera.getPossessed());
+        super(armorStandCamera.getPossessed(), List.of());
         camera = armorStandCamera;
     }
 
@@ -36,15 +39,15 @@ public class AnimatableArmorStandScreen extends ArmorStandScreen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        super.render(guiGraphics, mouseX, mouseY, partialTicks);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
         String translatedLabel = I18n.get("armorposer.gui.label.animate_button", new Object[0]);
-        guiGraphics.drawString(
+        guiGraphics.text(
                 this.font,
                 translatedLabel,
                 this.width - 20 - 100 - this.font.width(translatedLabel) - 10,
                 174 + (10 - 9 / 2),
-                16777215,
+                ARGB.opaque(16777215),
                 true
         );
     }

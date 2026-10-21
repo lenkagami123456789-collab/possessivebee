@@ -5,7 +5,7 @@ import net.just_s.PossessiveModClient;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.GraphicsPreset;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.LevelTargetBundle;
@@ -161,7 +161,7 @@ public class AstralProjectionCamera extends AbstractCamera {
     }
 
     @Override
-    public boolean onRenderHotbarAndDecorations(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    public boolean onRenderHotbarAndDecorations(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         return true;
     }
 }

@@ -5,7 +5,7 @@ import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -61,7 +61,7 @@ public abstract class AbstractCamera extends LocalPlayer {
                         // localGameProfile
                         new GameProfile(UUID.randomUUID(), "FreeCamera"),
                         // worldSessionTelemetryManager
-                        Minecraft.getInstance().getTelemetryManager().createWorldSessionManager(false, null, null),
+                        Minecraft.getInstance().getTelemetryManager().createWorldSessionManager(false, null, null, null),
                         // receivedRegistries
                         Minecraft.getInstance().player.registryAccess().freeze(),
                         // enabledFeatures
@@ -239,7 +239,7 @@ public abstract class AbstractCamera extends LocalPlayer {
         return true;
     }
 
-    public boolean  onRenderHotbarAndDecorations(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    public boolean  onRenderHotbarAndDecorations(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         return false;
     }
 
