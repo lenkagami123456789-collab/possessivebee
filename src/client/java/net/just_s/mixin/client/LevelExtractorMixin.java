@@ -40,7 +40,7 @@ public abstract class LevelExtractorMixin {
             EntityRenderState entityRenderState = extractEntity(entity, g);
             levelRenderState.entityRenderStates.add(entityRenderState);
             if (entityRenderState.appearsGlowing() && entity.isCurrentlyGlowing()) {
-                levelRenderState.haveGlowingEntities = true;
+                levelRenderState.shouldShowEntityOutlines = true;
             }
         }
     }

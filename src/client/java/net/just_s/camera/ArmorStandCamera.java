@@ -446,12 +446,12 @@ public class ArmorStandCamera extends AbstractCamera {
                 guiGraphics.pose().translate((float)(-(i + 8)), (float)(-(j + 12)));
             }
 
-            guiGraphics.renderFakeItem(itemStack, i, j, k);
+            guiGraphics.fakeItem(itemStack, i, j, k);
             if (f > 0.0F) {
                 guiGraphics.pose().popMatrix();
             }
 
-            guiGraphics.renderItemDecorations(this.minecraft.font, itemStack, i, j);
+            guiGraphics.itemDecorations(this.minecraft.font, itemStack, i, j);
         }
     }
 
