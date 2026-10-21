@@ -94,7 +94,7 @@ public abstract class AbstractCamera extends LocalPlayer {
     }
 
     public AbstractCamera(Minecraft client, int id) {
-        super(client, client.level, NETWORK_HANDLER, client.player.getStats(), client.player.getRecipeBook(), Input.EMPTY, false);
+        super(client, client.level, NETWORK_HANDLER, client.player.getStats(), client.player.getRecipeBook(), Input.EMPTY, false, client.player.chatAbilities());
 
         // Not to interfere with real entities in world. Should be negative.
         setId(id);
