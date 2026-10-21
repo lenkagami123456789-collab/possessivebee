@@ -16,6 +16,11 @@ repositories {
 		url "https://maven.saps.dev/releases"
 	}
 	maven {
+		// Forge Config API Port (transitive dependency of Armor Poser)
+		name = "Fuzs"
+		url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+	}
+	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
 	}
