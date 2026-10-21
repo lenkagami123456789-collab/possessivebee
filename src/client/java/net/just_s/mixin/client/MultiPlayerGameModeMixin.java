@@ -3,6 +3,7 @@ package net.just_s.mixin.client;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.just_s.PossessiveModClient;
+import net.just_s.camera.AbstractCamera;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.InteractionHand;
@@ -39,25 +40,16 @@ public class MultiPlayerGameModeMixin {
         }
     }
 
+    // 26.1+: interactAt was merged into interact(Player, Entity, EntityHitResult, InteractionHand)
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
-    private void possessive$onInteract(Player player, Entity entity, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+    private void possessive$onInteract(Player player, Entity entity, EntityHitResult hitResult, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (PossessiveModClient.cameraHandler.isEnabled()) {
-            cir.setReturnValue(
-                    PossessiveModClient.cameraHandler.getCamera().onInteract(
-                            player, entity, hand
-                    )
-            );
-        }
-    }
-
-    @Inject(method = "interactAt", at = @At("HEAD"), cancellable = true)
-    private void possessive$onInteractAt(Player player, Entity entity, EntityHitResult hitResult, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (PossessiveModClient.cameraHandler.isEnabled()) {
-            cir.setReturnValue(
-                    PossessiveModClient.cameraHandler.getCamera().onInteractAt(
-                            player, entity, hitResult, hand
-                    )
-            );
+            AbstractCamera camera = PossessiveModClient.cameraHandler.getCamera();
+            InteractionResult result = camera.onInteractAt(player, entity, hitResult, hand);
+            if (result == InteractionResult.PASS) {
+                result = camera.onInteract(player, entity, hand);
+            }
+            cir.setReturnValue(result);
         }
     }
 
