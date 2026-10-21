@@ -8,6 +8,7 @@
     "FreecamCompatMixin",
     "GameRendererMixin",
     "GuiMixin",
+    "GuiScreenMixin",
     "ItemInHandRendererMixin",
     "LevelExtractorMixin",
     "LevelRendererMixin",

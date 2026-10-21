@@ -4,7 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.just_s.PossessiveModClient;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -35,14 +34,6 @@ public class MinecraftMixin {
             PossessiveModClient.cameraHandler.getCamera().onContinueAttack();
             ci.cancel();
         }
-    }
-
-    @ModifyVariable(method = "setScreen", at = @At(value = "HEAD"))
-    private Screen possessive$onSetScreen(Screen value) {
-        if (PossessiveModClient.cameraHandler.isEnabled()) {
-            return PossessiveModClient.cameraHandler.getCamera().onSetScreen(value);
-        }
-        return value;
     }
 
     @ModifyConstant(method = "handleKeybinds", constant = @Constant(intValue = 9))
